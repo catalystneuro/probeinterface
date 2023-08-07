@@ -1109,10 +1109,11 @@ def read_spikeglx(file: Union[str, Path]) -> Probe:
     # sometimes we need to slice the probe when not all channels are saved
     saved_chans = get_saved_channel_indices_from_spikeglx_meta(meta_file)
     # remove the SYS chans
-    saved_chans = saved_chans[saved_chans < probe.get_contact_count()]
-    if saved_chans.size != probe.get_contact_count():
-        # slice if needed
-        probe = probe.get_slice(saved_chans)
+    # in the IBL meta files, no channels are 'saved' according to this...
+    #saved_chans = saved_chans[saved_chans < probe.get_contact_count()]
+    #if saved_chans.size != probe.get_contact_count():
+    #    # slice if needed
+    #    probe = probe.get_slice(saved_chans)
 
     return probe
 
